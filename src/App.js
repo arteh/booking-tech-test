@@ -12,8 +12,5 @@ function App() {
 
 export default App;
 
-// Create box and input component
-// use hooks
 
-// REMOVE THESE CLASSES eg app!!!!!!
 
