@@ -15,12 +15,19 @@
   text-align: left;
 }
 
+.search-form {
+  /* display: block; */
+}
+
 .search-form > label {
+  /* flex-direction: column;  */
   text-align: left;
   color: rgb(68, 68, 68);
 }
 
 .search-form > input {
+  /* position: relative; */
+  /* display: block; */
   width: 100%;
   height: 48px;
   border: 2.5px solid rgb(98, 181, 217);
@@ -34,6 +41,20 @@
 
 ::placeholder {
   color:rgb(145, 145, 145);
+}
+
+ul {
+  width: 100%;
+  list-style: none;
+  max-height: 160px;
+  overflow: auto;
+  background-color: white;
+  padding: 5px 5px 5px 0;
+  margin: 0;
+}
+
+li {
+  padding: 5px;
 }
 
 
