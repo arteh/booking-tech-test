@@ -1,29 +1,38 @@
-/* .App {
-  text-align: center;
-} */
+.App {
+  height: 100vh;
+  /* text-align: center; */
+  background-color: rgb(8, 112, 186);
+}
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 .search-box {
   background-color: rgb(243, 206, 86);
-  height: 50%;
-  width: 90%;
+  width: 70%;
   margin: auto;
   padding: 8px 30px 8px 20px;
+  position: relative;
+  top: 10%;
 }
 
-.search-box > h2 {
+.search-box>h2 {
   text-align: left;
 }
 
-.search-form {
-}
-
-.search-form > label {
+.search-form>label {
   text-align: left;
   color: rgb(68, 68, 68);
 }
 
-.search-form > input {
+.search-form>input {
   width: 100%;
   height: 48px;
   border: 2.5px solid rgb(98, 181, 217);
@@ -36,7 +45,7 @@
 }
 
 ::placeholder {
-  color:rgb(145, 145, 145);
+  color: rgb(145, 145, 145);
 }
 
 ul {
@@ -53,8 +62,26 @@ li {
   padding: 5px;
 }
 
+button {
+  display: block;
+  height: 64px;
+  line-height: 64px;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  width: 100%;
+  border: 1px solid transparent;
+  outline: 0;
+  background-color: rgb(0, 135, 77);
+  cursor: pointer;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 20px;
+}
 
-
-
-
-
+.search {
+  display: block;
+  line-height: 1em;
+  font-size: 1.75em;
+  font-weight: 700;
+}

@@ -53,6 +53,8 @@ export class SearchInput extends Component {
             value={value}
           ></input>
           <AutocompleteOptions {...this.state} />
+          <button type="submit">
+            <span className="search">Search</span></button>
         </form>
       </div>
     );
