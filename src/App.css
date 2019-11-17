@@ -54,7 +54,7 @@ ul {
   max-height: 160px;
   overflow: auto;
   background-color: white;
-  padding: 5px 5px 5px 0;
+  padding: 5px 5px 5px 5px;
   margin: 0;
 }
 
@@ -85,3 +85,11 @@ button {
   font-size: 1.75em;
   font-weight: 700;
 }
+
+/* ul li a {
+  display:block;
+ } */
+ 
+ ul li:hover, ul li:focus {
+  background-color: rgb(231, 244, 254);
+ }

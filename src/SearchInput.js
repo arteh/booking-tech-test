@@ -16,9 +16,8 @@ export class SearchInput extends Component {
 
   onKeyUp = () => {
     const { value } = this.state;
-    console.log("on key uppp value", value);
     if (value.length > 1) {
-      this.setState({isFetching: true})
+      this.setState({ isFetching: true });
       getLocations(value).then(response =>
         this.setState({ matchedOptions: response, isFetching: false })
       );
@@ -26,8 +25,6 @@ export class SearchInput extends Component {
   };
 
   onChange = e => {
-    console.log("change", e.currentTarget.value);
-
     this.setState({
       showOptions: true,
       value: e.currentTarget.value,
@@ -36,14 +33,13 @@ export class SearchInput extends Component {
   };
 
   onClick = e => {
-    console.log('click', e.currentTarget.innerText)
     this.setState({
       activeOption: 0,
       matchedOptions: [],
       showOptions: false,
       value: e.currentTarget.innerText
-    })
-  }
+    });
+  };
 
   render() {
     const { value } = this.state;
@@ -65,11 +61,10 @@ export class SearchInput extends Component {
             onKeyDown={this.onKeyDown}
             value={value}
           ></input>
-          <AutocompleteOptions {...this.state}
-          onClick={this.onClick}
-          />
+          <AutocompleteOptions {...this.state} onClick={this.onClick} />
           <button type="submit">
-            <span className="search">Search</span></button>
+            <span className="search">Search</span>
+          </button>
         </form>
       </div>
     );

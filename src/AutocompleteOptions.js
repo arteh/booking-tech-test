@@ -2,7 +2,6 @@ import React from "react";
 
 export const AutocompleteOptions = props => {
   const { isFetching, matchedOptions, value, showOptions, onClick } = props;
-  console.log("autocomplete props", props);
 
   let optionsMessage = "";
 
@@ -14,10 +13,11 @@ export const AutocompleteOptions = props => {
       optionsMessage = (
         <ul className="options">
           {matchedOptions.map((option, i) => {
-            return <li key={i}
-            onClick={onClick}>
-              {option.name}
-            </li>;
+            return (
+              <li key={i} onClick={onClick}>
+                {option.name}
+              </li>
+            );
           })}
         </ul>
       );
