@@ -6,6 +6,7 @@ export class SearchInput extends Component {
     isFetching: false,
     showOptions: false,
     matchedOptions: [],
+    activeOption: 0,
     value: ""
   };
 
@@ -25,13 +26,24 @@ export class SearchInput extends Component {
   };
 
   onChange = e => {
-    console.log("change", e.target.value);
+    console.log("change", e.currentTarget.value);
 
     this.setState({
       showOptions: true,
-      value: e.currentTarget.value
+      value: e.currentTarget.value,
+      activeOption: 0
     });
   };
+
+  onClick = e => {
+    console.log('click', e.currentTarget.innerText)
+    this.setState({
+      activeOption: 0,
+      matchedOptions: [],
+      showOptions: false,
+      value: e.currentTarget.innerText
+    })
+  }
 
   render() {
     const { value } = this.state;
@@ -50,9 +62,12 @@ export class SearchInput extends Component {
             placeholder="city, airport, station, region, district..."
             onChange={this.onChange}
             onKeyUp={this.onKeyUp}
+            onKeyDown={this.onKeyDown}
             value={value}
           ></input>
-          <AutocompleteOptions {...this.state} />
+          <AutocompleteOptions {...this.state}
+          onClick={this.onClick}
+          />
           <button type="submit">
             <span className="search">Search</span></button>
         </form>
