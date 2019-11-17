@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { AutocompleteOptions } from "./AutocompleteOptions.js";
+import { getLocations } from "./helpers";
 export class SearchInput extends Component {
   state = {
-      showOptions: false,
-      matchedOptions: [],
+    showOptions: false,
+    matchedOptions: [],
     value: ""
   };
 
@@ -11,34 +12,34 @@ export class SearchInput extends Component {
     options: []
   };
 
-  onChange = (e) => {
-      console.log("changeee", e.target.value);
-      const { options } = this.props;
-
-      const matchedOptions = options.filter((option) =>
-          option.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1
+  onKeyUp = () => {
+    const { value } = this.state;
+    console.log("on key uppp value", value);
+    if (value.length > 1) {
+      getLocations(value).then(response =>
+        this.setState({ matchedOptions: response })
       );
+    }
+  };
 
-      this.setState({
-          showOptions: true,
-          matchedOptions,
-          value: e.currentTarget.value,
-      })
+  onChange = e => {
+    console.log("change", e.target.value);
+
+    this.setState({
+      showOptions: true,
+      value: e.currentTarget.value
+    });
   };
 
   render() {
-    console.log("props", this.props);
-      const { showOptions,
-          matchedOptions,
-          value,
-      } = this.state;
+    const { value } = this.state;
 
     return (
       <div>
         <form autoComplete="off" className="search-form">
           <label htmlFor="Pick-up Location">Pick-up Location</label>
           <br />
-          
+
           <input
             name="search-input"
             id="search-input"
@@ -46,9 +47,10 @@ export class SearchInput extends Component {
             type="text"
             placeholder="city, airport, station, region, district..."
             onChange={this.onChange}
+            onKeyUp={this.onKeyUp}
             value={value}
           ></input>
-            <AutocompleteOptions {...this.state} />
+          <AutocompleteOptions {...this.state} />
         </form>
       </div>
     );
