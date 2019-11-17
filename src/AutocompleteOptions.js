@@ -1,18 +1,24 @@
 import React from "react";
 
 export const AutocompleteOptions = props => {
-  const { matchedOptions, value, showOptions } = props;
-  // console.log("autocomplete props", props);
+  const { isFetching, matchedOptions, value, showOptions } = props;
+  console.log("autocomplete props", props);
 
-  if (showOptions && matchedOptions.length > 0 && value.length > 1) {
-    return (
-      <ul className="options">
-        {matchedOptions.map((option, i) => {
-          return <li key={i}>{option.name}</li>;
-        })}
-      </ul>
-    );
-  } else if (value.length > 1 && matchedOptions.length < 1) {
-    return <p>No results found</p>;
-  } else return null;
+  let optionsMessage = "";
+
+  if (isFetching) optionsMessage = <p>Loading...</p>;
+  else if (!isFetching && showOptions && value.length > 1) {
+    if (matchedOptions.length < 1) optionsMessage = <p>No results found</p>;
+
+    if (matchedOptions.length > 0) {
+      optionsMessage = (
+        <ul className="options">
+          {matchedOptions.map((option, i) => {
+            return <li key={i}>{option.name}</li>;
+          })}
+        </ul>
+      );
+    }
+  }
+  return optionsMessage;
 };

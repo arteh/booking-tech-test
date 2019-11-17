@@ -3,6 +3,7 @@ import { AutocompleteOptions } from "./AutocompleteOptions.js";
 import { getLocations } from "./helpers";
 export class SearchInput extends Component {
   state = {
+    isFetching: false,
     showOptions: false,
     matchedOptions: [],
     value: ""
@@ -16,8 +17,9 @@ export class SearchInput extends Component {
     const { value } = this.state;
     console.log("on key uppp value", value);
     if (value.length > 1) {
+      this.setState({isFetching: true})
       getLocations(value).then(response =>
-        this.setState({ matchedOptions: response })
+        this.setState({ matchedOptions: response, isFetching: false })
       );
     }
   };
