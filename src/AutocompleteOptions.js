@@ -13,6 +13,8 @@ export const AutocompleteOptions = (props) => {
                     return <li key={i}>{option}</li>
                 })}
             </ul>)
+    } else if (value.length > 1 && matchedOptions.length < 1) {
+        return <p>No results found</p>
     } else return null;
 }
 
