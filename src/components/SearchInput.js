@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { AutocompleteOptions } from "./AutocompleteOptions.js";
-import { getLocations } from "./helpers";
+import { AutocompleteOptions } from "./";
+import { getLocations } from "../helpers.js";
+
 export class SearchInput extends Component {
   state = {
     isFetching: false,
     showOptions: false,
     matchedOptions: [],
-    activeOption: 0,
-    value: ""
+    value: "",
+    error: false
   };
 
   static defaultProps = {
@@ -18,23 +19,32 @@ export class SearchInput extends Component {
     const { value } = this.state;
     if (value.length > 1) {
       this.setState({ isFetching: true });
-      getLocations(value).then(response =>
-        this.setState({ matchedOptions: response, isFetching: false })
-      );
+
+      getLocations(value).then(response => {
+        if (response.error) {
+          this.setState({ isFetching: false, error: true });
+        } else {
+          this.setState({
+            isFetching: false,
+            matchedOptions: response,
+            error: false
+          });
+        }
+      });
     }
   };
 
   onChange = e => {
+    e.preventDefault();
     this.setState({
       showOptions: true,
-      value: e.currentTarget.value,
-      activeOption: 0
+      value: e.currentTarget.value
     });
   };
 
   onClick = e => {
+    e.preventDefault();
     this.setState({
-      activeOption: 0,
       matchedOptions: [],
       showOptions: false,
       value: e.currentTarget.innerText
@@ -42,8 +52,7 @@ export class SearchInput extends Component {
   };
 
   render() {
-    const { value } = this.state;
-
+    const { value, error } = this.state;
     return (
       <div>
         <form autoComplete="off" className="search-form">
@@ -58,13 +67,17 @@ export class SearchInput extends Component {
             placeholder="city, airport, station, region, district..."
             onChange={this.onChange}
             onKeyUp={this.onKeyUp}
-            onKeyDown={this.onKeyDown}
             value={value}
           ></input>
           <AutocompleteOptions {...this.state} onClick={this.onClick} />
           <button type="submit">
             <span className="search">Search</span>
           </button>
+          {error && (
+            <p>
+              <em>There has been an error. Please try again or contact us.</em>
+            </p>
+          )}
         </form>
       </div>
     );

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const AutocompleteOptions = props => {
   const { isFetching, matchedOptions, value, showOptions, onClick } = props;
@@ -6,7 +7,8 @@ export const AutocompleteOptions = props => {
   let optionsMessage = "";
 
   if (isFetching) optionsMessage = <p>Loading...</p>;
-  else if (!isFetching && showOptions && value.length > 1) {
+
+  if (!isFetching && showOptions && value.length > 1) {
     if (matchedOptions.length < 1) optionsMessage = <p>No results found</p>;
 
     if (matchedOptions.length > 0) {
@@ -14,7 +16,7 @@ export const AutocompleteOptions = props => {
         <ul className="options">
           {matchedOptions.map((option, i) => {
             return (
-              <li key={i} onClick={onClick}>
+              <li key={i + option} onClick={onClick}>
                 {option.name}
               </li>
             );
@@ -23,5 +25,13 @@ export const AutocompleteOptions = props => {
       );
     }
   }
+
   return optionsMessage;
+};
+
+AutocompleteOptions.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  matchedOptions: PropTypes.array.isRequired,
+  showOptions: PropTypes.bool.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };

@@ -31,7 +31,11 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "sinon": "^7.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arteh/booking-tech-test.git"
