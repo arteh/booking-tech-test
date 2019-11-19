@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import * as Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import sinon from "sinon";
-import axios from "axios";
 jest.mock("axios");
 import App from "./App";
 import {
@@ -11,7 +10,6 @@ import {
   SearchInput,
   AutocompleteOptions
 } from "../src/components/index";
-import { getLocations } from "./helpers.js";
 
 Enzyme.configure({ adapter: new Adapter() });
 
